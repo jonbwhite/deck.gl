@@ -89,6 +89,7 @@ const aliases = {
   '@deck.gl/aggregation-layers': resolve(rootDir, 'modules/aggregation-layers/src'),
   '@deck.gl/arcgis': resolve(rootDir, 'modules/arcgis/src'),
   '@deck.gl/carto': resolve(rootDir, 'modules/carto/src'),
+  '@deck.gl/core/arrow': resolve(rootDir, 'modules/core/src/arrow'),
   '@deck.gl/core': resolve(rootDir, 'modules/core/src'),
   '@deck.gl/extensions': resolve(rootDir, 'modules/extensions/src'),
   '@deck.gl/geo-layers': resolve(rootDir, 'modules/geo-layers/src'),
@@ -139,6 +140,10 @@ const optimizeDepsConfig = {
     '@luma.gl/webgl',
     '@luma.gl/shadertools',
     '@luma.gl/effects',
+    // Keep private Arrow uploads in the same optimized resource-class graph as the renderer.
+    ...(includePrivateModules
+      ? ['@luma.gl/arrow', '@luma.gl/gpgpu/gpu-data', '@luma.gl/core/webgl', '@luma.gl/core/webgpu']
+      : []),
     'maplibre-gl-v4',
     'maplibre-gl-v5',
     // loaders.gl dependencies
